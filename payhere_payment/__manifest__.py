@@ -38,5 +38,5 @@
     'auto_install': False,
     'application': True,
     'live_test_url': 'https://www.youtube.com/watch?v=keV39Xy-O34',
-    'images': ['static/description/banner.JPG'],
+    'images': ['static/description/banner.jpg'],
 }
