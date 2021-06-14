@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="payment_acquirer_payhere" model="payment.acquirer">
+            <field name="name">PayHere</field>
+            <field name="image_128" type="base64" file="payhere_payment/static/description/icon.png"/>
+            <field name="provider">payhere</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="view_template_id" ref="payhere_form"/>
+            <field name="state">test</field>
+            <field name="pre_msg">
+                <![CDATA[
+                    <p>You will be redirected to the Payhere payment Page after clicking on the Pay Now button.</p>
+                ]]>
+            </field>
+            <field name="payhere_merchant_id">121XXXX</field>
+            <field name="payhere_merchant_secret">merchantsecret</field>
+            <field name="description" type="html">
+                <p>
+                    PayHere is the Sri lankan authorized Payment Gateway that accepts all major credit cards, 
+                    mobile wallets and internet banking systems. 
+                </p>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><i class="fa fa-check"/>Online Payment</li>
+                    <li class="list-inline-item"><i class="fa fa-check"/>Payment Status Tracking</li>
+                </ul>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_acquirer_form_inherit_payment_payhere" model="ir.ui.view">
+        <field name="name">payment.acquirer.inherit</field>
+        <field name="model">payment.acquirer</field>
+        <field name="inherit_id" ref="payment.acquirer_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//group[@name="acquirer"]' position='after'>
+                <group attrs="{'invisible': [('provider', '!=', 'payhere')]}">
+                    <field name="payhere_merchant_id"/>
+                    <field name="payhere_merchant_secret" password="True"/>
+                        <p>You can find your <strong>Payhere Merchant ID</strong> and 
+                        <strong>Payhere Merchant Secret</strong> 
+                        in your PayHere Account's Settings page</p>
+                        <br/>
+                        <a href="https://support.payhere.lk/api-%26-mobile-sdk/payhere-checkout"
+                           target="_blank">Payhere Checkout API Documation </a>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
