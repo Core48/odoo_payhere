@@ -131,7 +131,10 @@ class PaymentTransactionPayhere(models.Model):
         if status == '2':
             _logger.info('Validated PayHere payment for tx %s: set as done' % (self.reference))
             self._set_transaction_done()
-        elif status in ['-1', '-2', '-3']:
+        elif status == '-2':
+            _logger.info('Validated PayHere payment for tx %s: status code :%s set as error' % (self.reference, status))
+            self._set_transaction_error()
+        elif status in ['-1','-3']:
             _logger.info('Validated PayHere payment for tx %s: status code :%s set as cancel' % (self.reference, status))
             self._set_transaction_cancel()
         else:
