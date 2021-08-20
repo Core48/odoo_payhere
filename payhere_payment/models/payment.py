@@ -40,6 +40,7 @@ class PaymentAcquirerPayhere(models.Model):
             return 'https://www.payhere.lk/pay/checkout'
         return 'https://sandbox.payhere.lk/pay/checkout'
 
+
     def _payhere_generate_sign(self, inout, values):
         if inout not in ('in', 'out'):
             raise Exception("Type must be 'in' or 'out'....")
@@ -58,9 +59,19 @@ class PaymentAcquirerPayhere(models.Model):
     def payhere_form_generate_values(self, values):
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         tx = self.env['payment.transaction'].search([('reference', '=', values.get('reference'))])
+        tx_so_id = self.env['sale.order'].search([('transaction_ids', '=', values.get('reference'))])
         if tx.state not in ['done', 'pending']:
             tx.reference = str(uuid.uuid4())
         payhere_values = values
+        shipping_partner_id = tx_so_id.partner_shipping_id
+        shipping_partner_name = shipping_partner_id.name
+        shipping_partner_street = shipping_partner_id.street
+        shipping_partner_street2 = shipping_partner_id.street2 or ""
+        shipping_partner_city = shipping_partner_id.city
+        shipping_partner_state = shipping_partner_id.state_id.name or ""
+        shipping_partner_zip = shipping_partner_id.zip or ""
+        shipping_partner_country = shipping_partner_id.country_id.name
+        
         payhere_values.update({
             "merchant_id": self.payhere_merchant_id,
             "return_url": urls.url_join(base_url, '/payment/payhere/return'),
@@ -68,9 +79,15 @@ class PaymentAcquirerPayhere(models.Model):
             "notify_url":urls.url_join(base_url, '/payment/payhere/response'),
             "currency":values['currency'].name,
             "order_id":tx.reference,
+            "delivery_address": ( shipping_partner_name + ', '+ shipping_partner_street +' '+ 
+                                shipping_partner_street2  ),
+            "delivery_city": (shipping_partner_city + ', '+ shipping_partner_state),
+            "delivery_country":(shipping_partner_zip + ', '+ shipping_partner_country),
+            
 
         })
         payhere_values['hash'] = self._payhere_generate_sign("in", payhere_values)
+        print("last val................",payhere_values)
         return payhere_values
     
 

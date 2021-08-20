@@ -18,6 +18,9 @@
             <input type="hidden" name="city" t-att-value='billing_partner_city'/>
             <input type="hidden" name="country" t-att-value='billing_partner_country_id'/>
             <input type="hidden" name="items" t-att-value='reference'/>
+            <input type="hidden" name="delivery_address" t-att-value='delivery_address'/>
+            <input type="hidden" name="delivery_city" t-att-value='delivery_city'/>
+            <input type="hidden" name="delivery_country" t-att-value='delivery_country'/>
         </div>
     </template>
 </odoo>
