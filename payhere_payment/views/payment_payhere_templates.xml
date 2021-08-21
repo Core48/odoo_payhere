@@ -4,7 +4,7 @@
         <div>
             <input type="hidden" name="data_set" t-att-data-action-url="tx_url" data-remove-me=""/>
             <input type="hidden" name="merchant_id" t-att-value='merchant_id'/>
-            <input type="hidden" name="amount" t-att-value='amount'/>
+            <input type="hidden" name="amount" t-att-value='amount_total'/>
             <input type="hidden" name="currency" t-att-value='currency'/>
             <input type="hidden" name="return_url" t-att-value='return_url'/>
             <input type="hidden" name="cancel_url" t-att-value='cancel_url'/>
