@@ -27,7 +27,7 @@
     'maintainer': 'Core48',
     'category': 'Payment',
     'license':'LGPL-3',
-    'version': '13.0.1.0.0',
+    'version': '13.0.1.0.1',
     'depends': ['payment'],
     'data': [
         'views/payment_views.xml',
