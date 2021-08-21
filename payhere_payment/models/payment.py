@@ -66,11 +66,22 @@ class PaymentAcquirerPayhere(models.Model):
         shipping_partner_id = tx_so_id.partner_shipping_id
         shipping_partner_name = shipping_partner_id.name
         shipping_partner_street = shipping_partner_id.street
-        shipping_partner_street2 = shipping_partner_id.street2 or ""
+        shipping_partner_street2 = shipping_partner_id.street2
         shipping_partner_city = shipping_partner_id.city
-        shipping_partner_state = shipping_partner_id.state_id.name or ""
-        shipping_partner_zip = shipping_partner_id.zip or ""
+        shipping_partner_state = shipping_partner_id.state_id.name
+        shipping_partner_zip = shipping_partner_id.zip
         shipping_partner_country = shipping_partner_id.country_id.name
+        
+        delivery_address_str = shipping_partner_name+ ', '+shipping_partner_street +', '+shipping_partner_street2
+        if shipping_partner_id.street2 == "" or " ":
+            delivery_address_str = shipping_partner_name+', '+shipping_partner_street
+        delivery_city_str = shipping_partner_city + ', '+ shipping_partner_state
+        if shipping_partner_id.state_id.name == "" or " " or None:
+            delivery_city_str = shipping_partner_city
+        delivery_country_str = shipping_partner_zip + ', '+ shipping_partner_country
+        if shipping_partner_id.zip == "" or " ":
+            delivery_country_str = shipping_partner_country
+        
         
         payhere_values.update({
             "merchant_id": self.payhere_merchant_id,
@@ -78,16 +89,15 @@ class PaymentAcquirerPayhere(models.Model):
             "cancel_url":urls.url_join(base_url, '/payment/payhere/cancel'),
             "notify_url":urls.url_join(base_url, '/payment/payhere/response'),
             "currency":values['currency'].name,
+            "amount_total":values['amount'],
             "order_id":tx.reference,
-            "delivery_address": ( shipping_partner_name + ', '+ shipping_partner_street +' '+ 
-                                shipping_partner_street2  ),
-            "delivery_city": (shipping_partner_city + ', '+ shipping_partner_state),
-            "delivery_country":(shipping_partner_zip + ', '+ shipping_partner_country),
+            "delivery_address": delivery_address_str,
+            "delivery_city": delivery_city_str,
+            "delivery_country":delivery_country_str,
             
 
         })
         payhere_values['hash'] = self._payhere_generate_sign("in", payhere_values)
-        print("last val................",payhere_values)
         return payhere_values
     
 
