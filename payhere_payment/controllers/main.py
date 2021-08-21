@@ -35,5 +35,6 @@ class PayhereController(http.Controller):
     @http.route(['/payment/payhere/return', '/payment/payhere/cancel'], type='http', auth='public', csrf=False)
     def payhere_return(self, **post):
         _logger.info('PayHere: entering feedback with post response data %s', pprint.pformat(post))
-
+        if post:
+            request.env['payment.transaction'].sudo().form_feedback(post, 'payhere')
         return werkzeug.utils.redirect('/payment/process')
