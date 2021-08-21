@@ -30,8 +30,7 @@ _logger = logging.getLogger(__name__)
 class PaymentAcquirerPayhere(models.Model):
     _inherit = 'payment.acquirer'
 
-    provider = fields.Selection(selection_add=[('payhere', 'PayHere')],
-                                ondelete={'payhere': 'set default'})
+    provider = fields.Selection(selection_add=[('payhere', 'PayHere')])
     payhere_merchant_id = fields.Char(string="PayHere Merchant ID", required_if_provider='payhere', groups='base.group_user')
     payhere_merchant_secret = fields.Char(string="PayHere Merchant Secret", required_if_provider='payhere', groups='base.group_user')
 
