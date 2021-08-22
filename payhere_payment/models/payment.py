@@ -62,24 +62,7 @@ class PaymentAcquirerPayhere(models.Model):
         if tx.state not in ['done', 'pending']:
             tx.reference = str(uuid.uuid4())
         payhere_values = values
-        shipping_partner_id = tx_so_id.partner_shipping_id
-        shipping_partner_name = shipping_partner_id.name
-        shipping_partner_street = shipping_partner_id.street
-        shipping_partner_street2 = shipping_partner_id.street2
-        shipping_partner_city = shipping_partner_id.city
-        shipping_partner_state = shipping_partner_id.state_id.name
-        shipping_partner_zip = shipping_partner_id.zip
-        shipping_partner_country = shipping_partner_id.country_id.name
-        
-        delivery_address_str = shipping_partner_name+ ', '+shipping_partner_street +', '+shipping_partner_street2
-        if shipping_partner_id.street2 == "" or " ":
-            delivery_address_str = shipping_partner_name+', '+shipping_partner_street
-        delivery_city_str = shipping_partner_city + ', '+ shipping_partner_state
-        if shipping_partner_id.state_id.name == "" or " " or None:
-            delivery_city_str = shipping_partner_city
-        delivery_country_str = shipping_partner_zip + ', '+ shipping_partner_country
-        if shipping_partner_id.zip == "" or " ":
-            delivery_country_str = shipping_partner_country
+
         
         
         payhere_values.update({
@@ -89,11 +72,7 @@ class PaymentAcquirerPayhere(models.Model):
             "notify_url":urls.url_join(base_url, '/payment/payhere/response'),
             "currency":values['currency'].name,
             "amount_total":values['amount'],
-            "order_id":tx.reference,
-            "delivery_address": delivery_address_str,
-            "delivery_city": delivery_city_str,
-            "delivery_country":delivery_country_str,
-            
+            "order_id":tx.reference,        
 
         })
         payhere_values['hash'] = self._payhere_generate_sign("in", payhere_values)
