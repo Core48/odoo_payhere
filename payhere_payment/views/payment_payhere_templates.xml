@@ -1,26 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <template id="payhere_form">
         <div>
-            <input type="hidden" name="data_set" t-att-data-action-url="tx_url" data-remove-me=""/>
-            <input type="hidden" name="merchant_id" t-att-value='merchant_id'/>
-            <input type="hidden" name="amount" t-att-value='amount_total'/>
-            <input type="hidden" name="currency" t-att-value='currency'/>
-            <input type="hidden" name="return_url" t-att-value='return_url'/>
-            <input type="hidden" name="cancel_url" t-att-value='cancel_url'/>
-            <input type="hidden" name="notify_url" t-att-value='notify_url'/>
-            <input type="hidden" name="order_id" t-att-value='order_id'/>
-            <input type="hidden" name="first_name" t-att-value='billing_partner_name'/>
-            <input type="hidden" name="last_name" t-att-value='billing_partner_last_name'/>
-            <input type="hidden" name="email" t-att-value='partner_email'/>
-            <input type="hidden" name="phone" t-att-value='billing_partner_phone or  " "'/>
-            <input type="hidden" name="address" t-att-value='billing_partner_address'/>
-            <input type="hidden" name="city" t-att-value='billing_partner_city'/>
-            <input type="hidden" name="country" t-att-value='billing_partner_country_id'/>
-            <input type="hidden" name="items" t-att-value='reference'/>
-            <input type="hidden" name="delivery_address" t-att-value='delivery_address'/>
-            <input type="hidden" name="delivery_city" t-att-value='delivery_city'/>
-            <input type="hidden" name="delivery_country" t-att-value='delivery_country'/>
+            <input
+        type="hidden"
+        name="data_set"
+        t-att-data-action-url="tx_url"
+        data-remove-me=""
+      />
+            <input type="hidden" name="merchant_id" t-att-value='merchant_id' />
+            <input type="hidden" name="amount" t-att-value='amount_total' />
+            <input type="hidden" name="currency" t-att-value='currency' />
+            <input type="hidden" name="return_url" t-att-value='return_url' />
+            <input type="hidden" name="cancel_url" t-att-value='cancel_url' />
+            <input type="hidden" name="notify_url" t-att-value='notify_url' />
+            <input type="hidden" name="order_id" t-att-value='order_id' />
+            <input
+        type="hidden"
+        name="first_name"
+        t-att-value='billing_partner_name'
+      />
+            <input
+        type="hidden"
+        name="last_name"
+        t-att-value='billing_partner_last_name'
+      />
+            <input type="hidden" name="email" t-att-value='partner_email' />
+            <input
+        type="hidden"
+        name="phone"
+        t-att-value='billing_partner_phone or  " "'
+      />
+            <input
+        type="hidden"
+        name="address"
+        t-att-value='billing_partner_address'
+      />
+            <input
+        type="hidden"
+        name="city"
+        t-att-value='billing_partner_city'
+      />
+            <input
+        type="hidden"
+        name="country"
+        t-att-value='billing_partner_country_id'
+      />
+            <input type="hidden" name="items" t-att-value='reference' />
+            <input
+        type="hidden"
+        name="delivery_address"
+        t-att-value='delivery_address'
+      />
+            <input
+        type="hidden"
+        name="delivery_city"
+        t-att-value='delivery_city'
+      />
+            <input
+        type="hidden"
+        name="delivery_country"
+        t-att-value='delivery_country'
+      />
         </div>
     </template>
 </odoo>

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 #    Copyright (C) 2021 Core48 - https://core48.com/
 #    This program is free software: you can modify
@@ -26,7 +25,7 @@
     'website': "https://core48.com",
     'maintainer': 'Core48',
     'category': 'Payment',
-    'license':'LGPL-3',
+    'license': 'LGPL-3',
     'version': '14.0.1.0.1',
     'depends': ['payment'],
     'data': [
