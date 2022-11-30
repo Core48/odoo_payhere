@@ -25,7 +25,7 @@
     'company': 'Core48',
     'website': "https://core48.com",
     'maintainer': 'Core48',
-    'category': ['Payment','Payment Gateway'],
+    'category': 'Payment Gateway',
     'license':'LGPL-3',
     'version': '13.0.1.0.1',
     'depends': ['payment'],
