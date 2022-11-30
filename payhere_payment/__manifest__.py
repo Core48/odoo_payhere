@@ -20,7 +20,7 @@
     'description': """
         PayHere payment gateway integration for Odoo
     """,
-    'author': "['Core48', 'Dinuth Perera']",
+    'author': ['Core48', 'Dinuth Perera'],
     'company': 'Core48',
     'website': "https://core48.com",
     'maintainer': 'Core48',
