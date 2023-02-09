@@ -38,13 +38,15 @@ class PaymentAcquirerPayhere(models.Model):
             return 'https://www.payhere.lk/pay/checkout'
         return 'https://sandbox.payhere.lk/pay/checkout'
 
+
     def _payhere_generate_sign(self, inout, values):
         if inout not in ('in', 'out'):
             raise Exception("Type must be 'in' or 'out'....")
         merchant_secret_md5 = (md5((self.payhere_merchant_secret).encode('utf-8')).hexdigest()).upper()
         if inout == 'in':
+            #hash = to_upper_case(md5(merchant_id + order_id + amount + currency + to_upper_case(md5(merchant_secret))))
             data_to_hash = (self.payhere_merchant_id + values['order_id'] +
-                            str(values['amount']) + values['currency'] + merchant_secret_md5)
+                            format(values['amount'], '.2f') + values['currency'] + merchant_secret_md5)
         else:
             data_to_hash = (self.payhere_merchant_id + values['order_id'] +
                             str(values['payhere_amount']) + values['payhere_currency'] +
@@ -58,7 +60,6 @@ class PaymentAcquirerPayhere(models.Model):
         if tx.state not in ['done', 'pending']:
             tx.reference = str(uuid.uuid4())
         payhere_values = values
-
         payhere_values.update({
             "merchant_id": self.payhere_merchant_id,
             "return_url": urls.url_join(base_url, '/payment/payhere/return'),
@@ -67,6 +68,7 @@ class PaymentAcquirerPayhere(models.Model):
             "currency": values['currency'].name,
             "amount_total": values['amount'],
             "order_id": tx.reference,
+            "countary_name": values['billing_partner_country'].name
         })
         payhere_values['hash'] = self._payhere_generate_sign("in", payhere_values)
         return payhere_values

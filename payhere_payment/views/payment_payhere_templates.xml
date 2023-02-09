@@ -15,6 +15,7 @@
             <input type="hidden" name="cancel_url" t-att-value='cancel_url' />
             <input type="hidden" name="notify_url" t-att-value='notify_url' />
             <input type="hidden" name="order_id" t-att-value='order_id' />
+            <input type="hidden" name="hash" t-att-value='hash' />  
             <input
         type="hidden"
         name="first_name"
@@ -44,7 +45,7 @@
             <input
         type="hidden"
         name="country"
-        t-att-value='billing_partner_country_id'
+        t-att-value='countary_name'
       />
             <input type="hidden" name="items" t-att-value='reference' />
             <input
